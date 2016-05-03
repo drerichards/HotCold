@@ -2,10 +2,11 @@
 var secretNumber;
 var guessValue;	
 var guess;
-var pastGuessArray = [];
+var pastGuessArray=[];
 var counter = 0;
 var oldCount = document.getElementById('count');
 var feedback = document.getElementById('feedback');
+var duplicateGuess = false;
 
 
 function makeSecretNum(){
@@ -13,34 +14,57 @@ function makeSecretNum(){
 	alert(secretNumber);
 }
 
-(function getUserGuess(){
-	$('#guessButton').click(function(event) {
-	event.preventDefault();
-		guess = document.getElementById('userGuess');
-		guessValue = (Math.abs(parseInt(guess.value), 10));
+
+function getUserGuess(){
+	guess = document.getElementById('userGuess');
+	guessValue = (Math.abs(parseInt(guess.value), 10));
 
 		if (guessValue > 100 || guessValue < 0){
 			alert('Please Choose a Number Between 0-100');
 			} else if (guessValue <= 100 || guessValue >= 0){
-					$('<li class="guessbox"></li>').appendTo("#guessList").text(guessValue);
 					
-					for (var i = 0; i < pastGuessArray.length; i++){
-						if (guessValue === pastGuessArray(i).value){
-							alert('You have already guessed ' + guessValue + '. Try again');
-						} else {
-						 	pastGuessArray.push(guessValue);
-						}
-					}					
-					counter++;
-					oldCount.innerHTML = counter;
-
+					// alert(pastGuessArray);
+					
+					validateGuess();
 					feedbackOutput();
 				} else {
 						alert('Invalid Character. Please Choose a Number Between 0-100');
 					}
-					// alert(pastGuessArray(0);
+}
+
+function userClick(){
+	$('#guessButton').click(function(event) {
+		event.preventDefault();
+		getUserGuess();
 	});
-}());
+};
+
+function userEnterKey(){
+	$('#userGuess').keydown(function(event){
+	    if(event.keyCode == 13) {
+    		event.preventDefault();
+			getUserGuess();
+		}
+	});
+};
+
+function validateGuess(){
+	for (var i = 0; i < pastGuessArray.length; i++){
+			if (pastGuessArray[i] === guessValue){
+		 		alert('You have already guessed ' + guessValue + '. Try again');
+		 		duplicateGuess = true;
+			}					
+	} postGuessFeedback();		
+}
+
+function postGuessFeedback(){
+	if (!duplicateGuess){
+			counter++;
+			oldCount.innerHTML = counter;
+		}	
+	$('<li class="guessbox"></li>').appendTo("#guessList").text(guessValue);
+	pastGuessArray.push(guessValue);
+}
 
 function feedbackOutput(){
 	switch(true) {
@@ -87,7 +111,6 @@ function feedbackOutput(){
 $(document).ready(function(){
 	makeSecretNum();
 
-
 	/*--- Display information modal box ---*/
 	$(".what").click(function(){
 		$(".overlay").fadeIn(1000);
@@ -98,13 +121,9 @@ $(document).ready(function(){
 		$(".overlay").fadeOut(1000);
 	});
 
-
-	$('#userGuess').keydown(function(event){
-	    if(event.keyCode == 13) {
-	      event.preventDefault();
-	      $('#guessButton').click();
-	    };
-	  }); 
+	userEnterKey();
+	userClick();
+ 
 
 	// $('.new').click(function(event){
  //  		event.preventDefault();
