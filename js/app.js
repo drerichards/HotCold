@@ -4,34 +4,51 @@ var guessValue;
 var counter = 0;
 var duplicateGuess = false;
 var pastGuessArray = [];
+var newButton;
 var guess = document.getElementById('userGuess');
 var oldCount = document.getElementById('count');
 var feedback = document.getElementById('feedback');
 var inputBox = document.getElementById('input');
+var guessList = $('#guessList');
+var form = $('form');
+var input = form.find('#userGuess');
 
 
 /*--- ============================================================= ---*/
 /*--- ============================================================= ---*/
 /*--- ============================================================= ---*/
 
+/*--- DOM ---*/
+$(document).ready(function(){
+	makeSecretNum();
+
+  newButton = $('a.new');
+  
+  form.submit(function(event) {
+    event.preventDefault();
+    getUserGuess();
+});
+  
+newButton.click(newGame);
 
 /*--- Functions ---*/
 
 //Create new game
 function newGame(){
+	input.show();
 	resetVariables();
 	makeSecretNum();
 }
 
 //Resets values and defaults text to original
 function resetVariables(){
+	guessList.empty();
 	counter = 0;
 	duplicateGuess = false;
 	pastGuessArray = [];
 	feedback.innerHTML = "Make your Guess!";
 	oldCount.innerHTML = 0;
-	inputBox.empty();
-	$('#guessList > li').remove();
+	$('#userGuess').val('');
 }
 
 //Generate new random number
@@ -40,33 +57,26 @@ function makeSecretNum(){
 	alert(secretNumber);
 }
 
-//If Guess button clicked
-function userClick(){
-	$('#guessButton').click(function(event) {
-		event.preventDefault();
-		getUserGuess();
-	});
-};
-
-//If Enter is pressed
-function userEnterKey(){
-	$('#userGuess').submit(function(event){
-	    if(event.keyCode == 13) {
-    		event.preventDefault();
-			getUserGuess();
-		}
-	});
-};
-
 //Guess Intake
 function getUserGuess(){
 	guessValue = (Math.abs(parseInt(guess.value), 10));
+	//reset value
+	input.val('');
+  	//focus on input for next guess
+  	input.focus();
 
+	if(guessValue % 1 !== 0) {
+		alert('Please Input a Number');
+		return true;
+	}
+	
 	if (guessValue > 100 || guessValue < 1){
 		alert('Please Choose a Number Between 1-100');
+
 	} else if (guessValue <= 100 || guessValue >= 1){
 		validateGuess();
 		feedbackOutput();
+
 		} else {
 			alert('Invalid Character. Please Choose a Number Between 1-100');
 			}
@@ -106,14 +116,15 @@ function feedbackOutput(){
 	switch(true) {
 	    case (secretNumber === guessValue):
 	        feedback.innerHTML = "***You got it!***<br/>Click \"New Game\" to play again";
+	        input.hide();
 	        break;
 	    case (Math.abs(secretNumber - guessValue) >= 50):
 	    	feedback.innerHTML = "Freezing Cold";
 	    	break;
-	    case (Math.abs(secretNumber - guessValue) >= 35):
+	    case (Math.abs(secretNumber - guessValue) >= 25):
 	    	feedback.innerHTML = "Cold";
 	        break;
-	    case (Math.abs(secretNumber - guessValue) >= 20):
+	    case (Math.abs(secretNumber - guessValue) >= 15):
 	    	feedback.innerHTML = "Warm";
 	    	break;
 	    case (Math.abs(secretNumber - guessValue) >= 10):
@@ -133,17 +144,6 @@ function feedbackOutput(){
 /*--- ============================================================= ---*/
 /*--- ============================================================= ---*/
 
-
-/*--- DOM ---*/
-$(document).ready(function(){
-	makeSecretNum();
-
-	/*--- Resets variables and begins new gamex ---*/
-	$('.new').click(function(event){
-	  	event.preventDefault();
-	  	newGame();
-	});
-
 	/*--- Display information modal box ---*/
 	$(".what").click(function(){
 		$(".overlay").fadeIn(1000);
@@ -158,8 +158,5 @@ $(document).ready(function(){
 	/*--- Display information tool tip on hover ---*/
 	$(function(){
 		$(inputBox).tooltip();
-	});
-
-	userEnterKey();
-	userClick();	
+	});	
 });
