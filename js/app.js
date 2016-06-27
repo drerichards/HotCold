@@ -1,6 +1,6 @@
 'use strict'
 var secretNumber;
-var guessValue;	
+var guessValue;
 var counter = 0;
 var duplicateGuess = false;
 var pastGuessArray = [];
@@ -21,14 +21,12 @@ var input = form.find('#userGuess');
 /*--- DOM ---*/
 $(document).ready(function(){
 	makeSecretNum();
-
-  newButton = $('a.new');
-  
-  form.submit(function(event) {
+	newButton = $('a.new');
+form.submit(function(event) {
     event.preventDefault();
     getUserGuess();
 });
-  
+
 newButton.click(newGame);
 
 /*--- Functions ---*/
@@ -46,9 +44,21 @@ function resetVariables(){
 	counter = 0;
 	duplicateGuess = false;
 	pastGuessArray = [];
-	feedback.innerHTML = "Make your Guess!";
+	feedback.innerHTML = "&nbsp;";
 	oldCount.innerHTML = 0;
+	input.show();
 	$('#userGuess').val('');
+	$('.w3-container').css('display', 'none');
+}
+
+function showAlert(title, message) {
+	$('#alertBar').css('visibility', 'visible');
+	$('#alertBar').append('<div class="w3-container w3-section w3-animate-top w3-blue"></div>');
+	setTimeout(function() {
+		$('.w3-container').remove()}, 3000);
+	$('.w3-container').append('<span onclick="this.parentElement.style.display=\'none\'" class="w3-closebtn">&times;</span>');
+	$('.w3-container').append('<h3>'+title+'</h3>');
+	$('.w3-container').append('<p>'+message+'</p>');
 }
 
 //Generate new random number
@@ -66,19 +76,25 @@ function getUserGuess(){
   	input.focus();
 
 	if(guessValue % 1 !== 0) {
-		alert('Please Input a Number');
+		var title = 'Invalid Character';
+		var message = 'Please Choose a Number Between 1-100';
+		showAlert(title, message);
 		return true;
 	}
-	
+
 	if (guessValue > 100 || guessValue < 1){
-		alert('Please Choose a Number Between 1-100');
+		var title = 'Entry Out of Range';
+		var message = 'Please Choose a Number Between 1-100';
+		showAlert(title, message);
 
 	} else if (guessValue <= 100 || guessValue >= 1){
 		validateGuess();
 		feedbackOutput();
 
 		} else {
-			alert('Invalid Character. Please Choose a Number Between 1-100');
+			var title = 'Invalid Character';
+			var message = 'Please Choose a Number Between 1-100';
+			showAlert(title, message);
 			}
 }
 
@@ -90,21 +106,23 @@ function validateGuess(){
 		for (arrayValue of pastGuessArray){
 			//if the index matches the user guess
 			if (arrayValue === guessValue){
-				alert('You\'ve already guessed '+guessValue+'. Try again!');
+				var title = 'Try Again';
+				var message = 'You\'ve already guessed '+guessValue+'!';
+				showAlert(title, message);
 				//validates to true and does not post guess to array and window
 				duplicateGuess = true;
 			}
 		}
 	}
 	postGuessFeedback();
-	duplicateGuess = false; 	
+	duplicateGuess = false;
 }
 
 //Post guesses to window and array if it is not a duplicate
 function postGuessFeedback(){
 	if (!duplicateGuess){
 		counter++;
-		oldCount.innerHTML = counter;	
+		oldCount.innerHTML = counter;
 		$('<li class="guessbox"></li>').appendTo("#guessList").text(guessValue);
 		pastGuessArray.push(guessValue);
 	}
@@ -115,29 +133,42 @@ function postGuessFeedback(){
 function feedbackOutput(){
 	switch(true) {
 	    case (secretNumber === guessValue):
-	        feedback.innerHTML = "***You got it!***<br/>Click \"New Game\" to play again";
-	        input.hide();
-	        break;
+				$('#alertBar').css('visibility', 'visible');
+				$('#alertBar').append('<div class="w3-container w3-section w3-animate-top w3-lime"></div>');
+
+				$('.w3-container').append('<span onclick="this.parentElement.style.display=\'none\'" class="w3-closebtn">&times;</span>');
+				$('.w3-container').append('<h3>***You got it!***</h3>');
+				$('.w3-container').append('<p>Click \"New Game\" to play again!</p>');
+				feedback.innerHTML = "";
+	      input.hide();
+	      break;
 	    case (Math.abs(secretNumber - guessValue) >= 50):
 	    	feedback.innerHTML = "Freezing Cold";
+				$('#feedback').css('color', '#00CDDB');
 	    	break;
 	    case (Math.abs(secretNumber - guessValue) >= 25):
 	    	feedback.innerHTML = "Cold";
+				$('#feedback').css('color', '#0079DB');
 	        break;
 	    case (Math.abs(secretNumber - guessValue) >= 15):
 	    	feedback.innerHTML = "Warm";
+				$('#feedback').css('color', '#DBA100');
 	    	break;
 	    case (Math.abs(secretNumber - guessValue) >= 10):
 	    	feedback.innerHTML = "Hot";
+				$('#feedback').css('color', '#DB6300');
 	    	break;
 	    case (Math.abs(secretNumber - guessValue) >= 5):
 	    	feedback.innerHTML = "Really Hot";
+				$('#feedback').css('color', '#DB4200');
 	    	break;
 	    case (Math.abs(secretNumber - guessValue) >= 1):
 	    	feedback.innerHTML = "Burning Up!";
+				$('#feedback').css('color', '#DB2500');
 	        break;
 	}
 }
+
 
 
 /*--- ============================================================= ---*/
@@ -153,10 +184,10 @@ function feedbackOutput(){
 	$("a.close").click(function(){
 		$(".overlay").fadeOut(1000);
 	});
-	
-	
+
+
 	/*--- Display information tool tip on hover ---*/
 	$(function(){
 		$(inputBox).tooltip();
-	});	
+	});
 });
