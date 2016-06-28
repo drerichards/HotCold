@@ -13,7 +13,6 @@ h1 {
 }
 #feedback {
     font-size: 1.75em;
-    margin-bottom: 2.5em;
     padding: 0;
 }
 #alertBar {
@@ -30,7 +29,7 @@ input.text {
     margin-top: 1.5em;
 }
 input.button {
-    margin: 1.5em auto;
+    margin: 0.8em auto;
     width: 70px;
     height: 70px;
 }

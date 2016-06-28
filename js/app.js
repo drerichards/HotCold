@@ -50,6 +50,7 @@ $(document).ready(function() {
         $('#userGuess').val('');
         $('.w3-container').css('display', 'none');
 				$('.button').unbind();
+				$('#feedback').css('font-family', 'Pinniepoker');
     }
 
     function showAlert(title, message) {
