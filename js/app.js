@@ -54,12 +54,17 @@ function resetVariables(){
 function showAlert(title, message) {
 	$('#alertBar').css('visibility', 'visible');
 	$('#alertBar').append('<div class="w3-container w3-section w3-animate-top w3-blue"></div>');
+	$('.button').bind('click', function(e){
+			e.preventDefault();});
 	setTimeout(function() {
-		$('.w3-container').remove()}, 3000);
+		$('.w3-container').remove()
+		$('.button').unbind();}, 3000);
+
 	$('.w3-container').append('<span onclick="this.parentElement.style.display=\'none\'" class="w3-closebtn">&times;</span>');
 	$('.w3-container').append('<h3>'+title+'</h3>');
 	$('.w3-container').append('<p>'+message+'</p>');
 }
+
 
 //Generate new random number
 function makeSecretNum(){

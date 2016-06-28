@@ -1,0 +1,57 @@
+.game {
+  width: 375px;
+  height: auto;
+  padding-top: 1.5em;
+}
+
+h1 {
+  font-size: 2.75em;
+  padding-bottom: 0.5em;
+}
+
+.game h2 {
+  font-size: 2.5em;
+  padding: 0.75em 0.4em;
+}
+
+#feedback {
+  font-size: 1.75em;
+  padding-top: 0.75em;
+}
+
+input.text {
+  font-size: 1.5em;
+  margin-top: 1.5em;
+}
+
+input.button {
+  margin-top: 1.5em;
+}
+
+.game p {
+  margin-top: 0.5em;
+}
+
+ul.guessBox {
+  height: 150px;
+  width: 330px;
+  margin: 5px 4px 0;
+  position: absolute;
+  word-wrap: break-word;
+}
+
+.content {
+  width: auto;
+}
+
+.content > div {
+  font-size: 1em;
+}
+
+nav ul li {
+  font-size: 0.75em;
+}
+
+#count {
+  font-size: 1.25em;
+}
