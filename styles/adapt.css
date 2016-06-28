@@ -1,57 +1,57 @@
 .game {
-  width: 375px;
-  height: 65%;
-  padding-top: 1.5em;
+    width: 95%;
+    height: 78%;
+    padding-top: 1em;
 }
-
 h1 {
-  font-size: 2.75em;
-  padding: 0;
+    font-size: 2.75em;
+    padding: 0;
 }
-
 .game h2 {
-  font-size: 2.5em;
-  padding: 0.3em;
+    font-size: 2.5em;
+    padding: 0.3em;
 }
-
 #feedback {
-  font-size: 1.75em;
-  padding-top: 0.75em;
+    font-size: 1.75em;
+    margin-bottom: 2.5em;
+    padding: 0;
 }
-
+#alertBar {
+    position: absolute;
+    z-index: 500;
+    width: 100%;
+}
+input {
+    width: 90%;
+    height: 20%;
+}
 input.text {
-  font-size: 1.5em;
-  margin-top: 1.5em;
+    font-size: 1.5em;
+    margin-top: 1.5em;
 }
-
 input.button {
-  margin-top: 1.5em;
+    margin: 1.5em auto;
+    width: 70px;
+    height: 70px;
 }
-
 .game p {
-  margin-top: 0.5em;
+    margin: 0;
 }
-
 ul.guessBox {
-  height: 150px;
-  width: 330px;
-  margin: 5px 4px 0;
-  position: absolute;
-  word-wrap: break-word;
+    height: 130px;
+    width: 330px;
+    margin: 1px auto;
+    word-wrap: break-word;
 }
-
 .content {
-  width: auto;
+    width: auto;
 }
-
-.content > div {
-  font-size: 1em;
+.content> div {
+    font-size: 1em;
 }
-
 nav ul li {
-  font-size: 0.75em;
+    font-size: 0.75em;
 }
-
 #count {
-  font-size: 1.25em;
+    font-size: 1.25em;
 }
