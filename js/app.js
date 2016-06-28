@@ -197,9 +197,4 @@ $(document).ready(function() {
         $(".overlay").fadeOut(1000);
     });
 
-
-    /*--- Display information tool tip on hover ---*/
-    $(function() {
-        $(inputBox).tooltip();
-    });
 });
