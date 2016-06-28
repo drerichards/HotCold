@@ -1,3 +1,15 @@
+@font-face {
+  font-family: Quicksand; src: url("../fonts/Quicksand_Book.otf");
+}
+
+@font-face {
+  font-family: Architext; src: url("../fonts/Architex.ttf");
+}
+
+@font-face {
+  font-family: Pinniepoker; src: url("../fonts/PINNIEPO.TTF");
+}
+
 /*---------------------------------------------------------------------------------
    Common Styles
 ---------------------------------------------------------------------------------*/
