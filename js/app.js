@@ -73,7 +73,7 @@ $(document).ready(function() {
     //Generate new random number
     function makeSecretNum() {
         secretNumber = Math.floor(Math.random() * 100) + 1;
-        alert(secretNumber);
+        // alert(secretNumber);
     }
 
     //Guess Intake
