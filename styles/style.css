@@ -91,7 +91,7 @@ h1 {
     padding-bottom: 0.2em;
     color: #658E9C;
     font-family: "Quicksand";
-    text-shadow: 2px 3px 3px #555;
+    /*text-shadow: 2px 3px 3px #555;*/
 }
 
 /*style for hidden modal*/
@@ -182,9 +182,9 @@ h1 {
     border-radius: 100%;
     border: 1px black solid;
     margin: 0 auto;
-    -webkit-box-shadow: 12px 12px 11px 0px rgba(50, 50, 50, 0.75);
+    /*-webkit-box-shadow: 12px 12px 11px 0px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 12px 12px 11px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 12px 12px 11px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 12px 12px 11px 0px rgba(50, 50, 50, 0.75);*/
     border-bottom-color: #CACF85;
     border-top-color: #8CBA80;
     border-right-color: #658E9C;
